@@ -10,7 +10,6 @@ const Header = () => {
   const navigate = useNavigate();
   const menuRef = useRef();
 
-  // close dropdown when clicking outside
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -25,17 +24,17 @@ const Header = () => {
     <header className="flex justify-between items-center px-4 py-2
                        bg-white dark:bg-black border-b dark:border-gray-700">
 
-      {/* Logo */}
+     
       <Link to="/" className="flex items-center gap-2">
         <span className="text-xl font-bold text-red-600">YouTube</span>
       </Link>
 
-      {/* Search placeholder (already implemented earlier) */}
+      
       <div className="hidden md:block w-1/3"></div>
 
-      {/* Right Section */}
+     
       <div className="flex items-center gap-4 relative" ref={menuRef}>
-        {/* Theme toggle */}
+       
         <button
           onClick={toggleTheme}
           className="px-2 py-1 border rounded dark:text-white"
@@ -43,7 +42,7 @@ const Header = () => {
           🌗
         </button>
 
-        {/* AUTH SECTION */}
+      
         {!user ? (
           <>
             <Link
@@ -61,7 +60,7 @@ const Header = () => {
           </>
         ) : (
           <>
-            {/* Profile Photo */}
+            
             <img
               src={user.avatar || "https://i.pravatar.cc/150"}
               alt="profile"
@@ -69,7 +68,7 @@ const Header = () => {
               className="w-9 h-9 rounded-full cursor-pointer border"
             />
 
-            {/* Dropdown */}
+
             {open && (
               <div
                 className="absolute right-0 top-12 w-56
