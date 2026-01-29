@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-black text-white;
+}
+
+input {
+  @apply bg-white text-black border border-gray-300 rounded;
+}
+
+.dark input {
+  @apply bg-gray-800 text-white border-gray-600;
+}
+html,
+body {
+  @apply bg-white text-black;
+}
+
+html.dark,
+html.dark body {
+  @apply bg-black text-white;
+}
