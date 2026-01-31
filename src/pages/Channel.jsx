@@ -1,58 +1,76 @@
-import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
-import { uploadToCloudinary } from "../services/cloudinary";
-import { AuthContext } from "../context/AuthContext";
 
-const Channel = () => {
-  const { id } = useParams();
-  const { user } = useContext(AuthContext);
+const CreateChannel = () => {
+  const [channelName, setChannelName] = useState("");
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [channel, setChannel] = useState(null);
-  const [videoFile, setVideoFile] = useState(null);
-  const [thumbFile, setThumbFile] = useState(null);
-  const [title, setTitle] = useState("");
+  const navigate = useNavigate();
 
-  const fetchChannel = async () => {
-    const res = await API.get(`/channels/${id}`);
-    setChannel(res.data);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  useEffect(() => {
-    fetchChannel();
-  }, []);
+    if (!channelName.trim()) return;
 
-  const uploadVideo = async () => {
-    const videoUrl = await uploadToCloudinary(videoFile, "video");
-    const thumbnailUrl = await uploadToCloudinary(thumbFile, "image");
+    setLoading(true);
 
-    await API.post("/videos", {
-      title,
-      videoUrl,
-      thumbnailUrl,
-      category: "Education",
-      channelId: id
+    const res = await API.post("/channels", {
+      channelName,
+      description,
+      channelBanner: "https://picsum.photos/300"
     });
 
-    fetchChannel();
+    navigate(`/channel/${res.data._id}`);
   };
 
-  if (!channel) return null;
-
   return (
-    <div className="p-6">
-      <h1 className="text-2xl">{channel.channelName}</h1>
+    <div className="min-h-screen flex items-center justify-center
+                    bg-white dark:bg-black">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white dark:bg-gray-900
+                   p-6 rounded w-96
+                   border dark:border-gray-700"
+      >
+        <h2 className="text-xl font-semibold mb-4
+                       text-black dark:text-white">
+          Create Channel
+        </h2>
 
-      {user && (
-        <>
-          <input type="file" accept="video/*" onChange={e => setVideoFile(e.target.files[0])} />
-          <input type="file" accept="image/*" onChange={e => setThumbFile(e.target.files[0])} />
-          <input placeholder="Title" onChange={e => setTitle(e.target.value)} />
-          <button onClick={uploadVideo}>Upload</button>
-        </>
-      )}
+        <input
+          type="text"
+          placeholder="Channel name"
+          value={channelName}
+          onChange={(e) => setChannelName(e.target.value)}
+          className="w-full mb-3 px-3 py-2 rounded
+                     bg-white text-black border
+                     dark:bg-gray-800 dark:text-white
+                     dark:border-gray-600"
+        />
+
+        <textarea
+          placeholder="Channel description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full mb-3 px-3 py-2 rounded
+                     bg-white text-black border
+                     dark:bg-gray-800 dark:text-white
+                     dark:border-gray-600"
+        />
+
+        <button
+          disabled={loading}
+          className="w-full bg-red-600
+                     text-white py-2 rounded
+                     hover:bg-red-700"
+        >
+          {loading ? "Creating..." : "Create Channel"}
+        </button>
+      </form>
     </div>
   );
 };
 
-export default Channel;
+export default CreateChannel;
