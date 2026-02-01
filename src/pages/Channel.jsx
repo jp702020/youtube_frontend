@@ -1,76 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import API from "../services/api";
-
-const CreateChannel = () => {
-  const [channelName, setChannelName] = useState("");
-  const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!channelName.trim()) return;
-
-    setLoading(true);
-
-    const res = await API.post("/channels", {
-      channelName,
-      description,
-      channelBanner: "https://picsum.photos/300"
-    });
-
-    navigate(`/channel/${res.data._id}`);
-  };
-
+const Channel = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center
-                    bg-white dark:bg-black">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white dark:bg-gray-900
-                   p-6 rounded w-96
-                   border dark:border-gray-700"
-      >
-        <h2 className="text-xl font-semibold mb-4
-                       text-black dark:text-white">
-          Create Channel
-        </h2>
+    <div className="pt-14 p-6">
+      <h1 className="text-2xl mb-4">Upload Video</h1>
 
+      <div className="bg-gray-100 dark:bg-gray-900
+                      p-4 rounded w-full max-w-xl">
         <input
-          type="text"
-          placeholder="Channel name"
-          value={channelName}
-          onChange={(e) => setChannelName(e.target.value)}
-          className="w-full mb-3 px-3 py-2 rounded
-                     bg-white text-black border
-                     dark:bg-gray-800 dark:text-white
-                     dark:border-gray-600"
+          placeholder="Video title"
+          className="w-full mb-2 p-2 border rounded"
         />
 
-        <textarea
-          placeholder="Channel description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full mb-3 px-3 py-2 rounded
-                     bg-white text-black border
-                     dark:bg-gray-800 dark:text-white
-                     dark:border-gray-600"
-        />
+        <input type="file" className="mb-2" />
+        <input type="file" className="mb-4" />
 
-        <button
-          disabled={loading}
-          className="w-full bg-red-600
-                     text-white py-2 rounded
-                     hover:bg-red-700"
-        >
-          {loading ? "Creating..." : "Create Channel"}
+        <button className="bg-red-600 text-white px-4 py-2 rounded">
+          Upload
         </button>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default CreateChannel;
+export default Channel;

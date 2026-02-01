@@ -1,28 +1,49 @@
-import { Link } from "react-router-dom";
-
 const VideoCard = ({ video }) => {
   return (
-    <Link to={`/video/${video._id}`}>
-      <div className="cursor-pointer">
+    <div className="cursor-pointer">
+      {/* Thumbnail */}
+      <div className="relative w-full">
         <img
-          src={video.thumbnailUrl}
+          src={video.thumbnail}
           alt={video.title}
-          className="w-full h-44 object-cover rounded-lg"
+          className="w-full rounded-xl"
         />
 
-        <div className="mt-2">
-          <h3 className="text-sm font-semibold line-clamp-2">
+        {/* Duration */}
+        <span
+          className="absolute bottom-2 right-2
+                     bg-black text-white text-xs
+                     px-1 rounded"
+        >
+          {video.duration}
+        </span>
+      </div>
+
+      {/* Details */}
+      <div className="flex gap-3 mt-3">
+        {/* Channel avatar */}
+        <img
+          src={video.channelAvatar}
+          alt="channel"
+          className="w-9 h-9 rounded-full"
+        />
+
+        {/* Text */}
+        <div>
+          <h3 className="font-medium text-sm line-clamp-2">
             {video.title}
           </h3>
-          <p className="text-xs text-gray-400">
-            {video.channelId?.channelName}
+
+          <p className="text-gray-600 text-xs mt-1">
+            {video.channelName}
           </p>
-          <p className="text-xs text-gray-400">
-            {video.views} views
+
+          <p className="text-gray-600 text-xs">
+            {video.views} views • {video.time}
           </p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
