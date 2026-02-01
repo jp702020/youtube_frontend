@@ -1,71 +1,39 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import API from "../services/api";
 
 const Register = () => {
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: ""
-  });
-
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    await API.post("/auth/register", form);
-    navigate("/login");
+
+    // auto login after register
+    login({
+      name: "New User",
+      avatar: "https://i.pravatar.cc/150?img=45"
+    });
+
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-black">
+    <div className="h-screen flex justify-center items-center bg-gray-100">
       <form
-  onSubmit={handleSubmit}
-  className="bg-white dark:bg-gray-900 p-6 rounded w-80 border border-gray-300 dark:border-gray-700"
->
-  <h2 className="text-xl mb-4 text-black dark:text-white">
-    Register
-  </h2>
+        onSubmit={submitHandler}
+        className="bg-white p-8 rounded-xl w-96 shadow"
+      >
+        <h2 className="text-xl font-semibold mb-4">Register</h2>
 
-  <input
-    placeholder="Username"
-    className="w-full mb-3 px-3 py-2 rounded
-               bg-white text-black border border-gray-300
-               dark:bg-gray-800 dark:text-white dark:border-gray-600
-               focus:outline-none focus:ring-2 focus:ring-red-500"
-    onChange={(e) =>
-      setForm({ ...form, username: e.target.value })
-    }
-  />
+        <input className="w-full border p-2 mb-3 rounded" placeholder="Name" />
+        <input className="w-full border p-2 mb-3 rounded" placeholder="Email" />
+        <input className="w-full border p-2 mb-4 rounded" placeholder="Password" />
 
-  <input
-    placeholder="Email"
-    className="w-full mb-3 px-3 py-2 rounded
-               bg-white text-black border border-gray-300
-               dark:bg-gray-800 dark:text-white dark:border-gray-600
-               focus:outline-none focus:ring-2 focus:ring-red-500"
-    onChange={(e) =>
-      setForm({ ...form, email: e.target.value })
-    }
-  />
-
-  <input
-    type="password"
-    placeholder="Password"
-    className="w-full mb-3 px-3 py-2 rounded
-               bg-white text-black border border-gray-300
-               dark:bg-gray-800 dark:text-white dark:border-gray-600
-               focus:outline-none focus:ring-2 focus:ring-red-500"
-    onChange={(e) =>
-      setForm({ ...form, password: e.target.value })
-    }
-  />
-
-  <button className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
-    Register
-  </button>
-</form>
-
+        <button className="w-full bg-blue-600 text-white py-2 rounded">
+          Register
+        </button>
+      </form>
     </div>
   );
 };

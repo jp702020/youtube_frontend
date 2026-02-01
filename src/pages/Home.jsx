@@ -1,4 +1,5 @@
 import VideoCard from "../components/VideoCard";
+import Categories from "../components/Categories";
 
 const dummyVideos = [
   {
@@ -45,14 +46,16 @@ const dummyVideos = [
 
 const Home = () => {
   return (
-    <div className="pt-16 px-6">
-      <div
-        className="grid gap-6
-                   grid-cols-1
-                   sm:grid-cols-2
-                   md:grid-cols-3
-                   lg:grid-cols-4"
-      >
+    <div className="pt-0">
+      {/* Category buttons (below header) */}
+      <Categories />
+
+      {/* Video grid */}
+      <div className="px-6 mt-4 grid gap-6
+                      grid-cols-1
+                      sm:grid-cols-2
+                      md:grid-cols-3
+                      lg:grid-cols-4">
         {dummyVideos.map((video) => (
           <VideoCard key={video.id} video={video} />
         ))}

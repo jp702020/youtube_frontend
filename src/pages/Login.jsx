@@ -1,27 +1,51 @@
-const Login = ({ setLoggedIn }) => {
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
+const Login = () => {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    // dummy login
+    login({
+      name: "Junaid Patel",
+      avatar: "https://i.pravatar.cc/150?img=32"
+    });
+
+    navigate("/");
+  };
+
   return (
-    <div className="flex justify-center items-center h-[80vh]">
-      <div className="border p-6 rounded w-80">
-        <h2 className="text-xl mb-4">Login</h2>
+    <div className="h-screen flex justify-center items-center bg-gray-100">
+      <form
+        onSubmit={submitHandler}
+        className="bg-white p-8 rounded-xl w-96 shadow"
+      >
+        <h2 className="text-xl font-semibold mb-4">Login</h2>
 
         <input
+          type="email"
           placeholder="Email"
-          className="w-full mb-3 p-2 border rounded"
+          className="w-full border p-2 mb-3 rounded"
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Password"
-          className="w-full mb-4 p-2 border rounded"
+          className="w-full border p-2 mb-4 rounded"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button
-          onClick={() => setLoggedIn(true)}
-          className="w-full bg-blue-600 text-white py-2 rounded"
-        >
+        <button className="w-full bg-blue-600 text-white py-2 rounded">
           Login
         </button>
-      </div>
+      </form>
     </div>
   );
 };

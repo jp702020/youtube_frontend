@@ -24,7 +24,7 @@ const Sidebar = ({ open }) => {
     <aside
       className="fixed top-14 left-0 w-56 h-full
                  bg-white border-r
-                 px-3 py-2 text-sm overflow-y-auto"
+                 px-3 py-2 text-sm overflow-y-auto h-screen overflow-y-auto hide-scrollbar"
     >
       {/* Main */}
       <Link to="/" className={`${item} bg-gray-100 font-medium`}>

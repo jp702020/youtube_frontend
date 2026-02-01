@@ -1,5 +1,10 @@
 import { Menu, Search, MoreVertical } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+// import { useNavigate } from "react-router-dom";
+
+
 
 const Header = ({ toggleSidebar, loggedIn }) => {
   const navigate = useNavigate();
@@ -7,7 +12,7 @@ const Header = ({ toggleSidebar, loggedIn }) => {
   return (
     <header className="fixed top-0 left-0 right-0 h-14 z-50
                        flex items-center justify-between
-                       px-4 bg-white border-b">
+                       px-4 bg-white border-b w-full">
 
       {/* Left */}
       <div className="flex items-center gap-4">
