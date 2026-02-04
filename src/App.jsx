@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import Watch from "./pages/Watch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import CreateChannel from "./pages/CreateChannel";
+import Channel from "./pages/Channel";
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
           <Route path="/watch/:id" element={<Watch />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/create-channel" element={<CreateChannel />} />
+          <Route path="/channel/:id" element={<Channel />} />
 
         </Routes>
       </div>

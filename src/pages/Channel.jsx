@@ -1,21 +1,27 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+
 const Channel = () => {
+  const { channel } = useContext(AuthContext);
+
+  if (!channel) {
+    return <p className="p-6">No channel found</p>;
+  }
+
   return (
-    <div className="pt-14 p-6">
-      <h1 className="text-2xl mb-4">Upload Video</h1>
-
-      <div className="bg-gray-100 dark:bg-gray-900
-                      p-4 rounded w-full max-w-xl">
-        <input
-          placeholder="Video title"
-          className="w-full mb-2 p-2 border rounded"
+    <div className="p-6">
+      <div className="flex items-center gap-4">
+        <img
+          src={channel.avatar}
+          className="w-20 h-20 rounded-full"
         />
-
-        <input type="file" className="mb-2" />
-        <input type="file" className="mb-4" />
-
-        <button className="bg-red-600 text-white px-4 py-2 rounded">
-          Upload
-        </button>
+        <div>
+          <h1 className="text-2xl font-semibold">
+            {channel.channelName}
+          </h1>
+          <p className="text-gray-600">{channel.subscribers} subscribers</p>
+          <p className="text-sm mt-2">{channel.description}</p>
+        </div>
       </div>
     </div>
   );
