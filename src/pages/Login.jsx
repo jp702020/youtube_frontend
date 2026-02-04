@@ -39,6 +39,16 @@ const Login = () => {
         >
           Login
         </button>
+        <p className="text-sm mt-4 text-center">
+  New here?{" "}
+  <span
+    onClick={() => navigate("/signup")}
+    className="text-blue-600 cursor-pointer"
+  >
+    Create an account
+  </span>
+</p>
+
       </div>
     </div>
   );

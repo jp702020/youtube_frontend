@@ -5,6 +5,8 @@ import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import Watch from "./pages/Watch";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -19,6 +21,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/watch/:id" element={<Watch />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
         </Routes>
       </div>
     </>
