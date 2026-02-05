@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import CreateChannel from "./pages/CreateChannel";
 import Channel from "./pages/Channel";
+import UploadVideo from "./pages/UploadVideo";
 
 
 const App = () => {
@@ -26,6 +27,8 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/create-channel" element={<CreateChannel />} />
           <Route path="/channel/:id" element={<Channel />} />
+          <Route path="/upload" element={<UploadVideo />} />
+
 
         </Routes>
       </div>
