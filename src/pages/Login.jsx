@@ -1,19 +1,28 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import api from "../api/axios";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login({
-      id: "u1",
-      name: "Test User",
-      avatar: "https://i.pravatar.cc/150?img=3"
-    });
+  // ✅ STATE VARIABLES (THIS WAS MISSING)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    navigate("/");
+  const handleLogin = async () => {
+    try {
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
+
+      login(res.data.user);
+      navigate("/");
+    } catch (err) {
+      alert("Invalid email or password");
+    }
   };
 
   return (
@@ -25,12 +34,16 @@ const Login = () => {
           type="email"
           placeholder="Email"
           className="w-full border px-3 py-2 mb-3"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Password"
           className="w-full border px-3 py-2 mb-4"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <button
@@ -39,17 +52,16 @@ const Login = () => {
         >
           Login
         </button>
-        <p className="text-sm mt-4 text-center">
-  New here?{" "}
+      </div>
+      <p className="text-sm mt-4 text-center">
+  New user?{" "}
   <span
-    onClick={() => navigate("/signup")}
+    onClick={() => navigate("/Signup")}
     className="text-blue-600 cursor-pointer"
   >
-    Create an account
+    Register
   </span>
 </p>
-
-      </div>
     </div>
   );
 };

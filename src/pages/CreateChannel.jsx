@@ -1,6 +1,17 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
+
+const handleCreate = async () => {
+  const res = await api.post("/channels", {
+    channelName,
+    description,
+  });
+
+  createChannel(res.data);
+};
+
 
 const CreateChannel = () => {
   const { user, createChannel } = useContext(AuthContext);

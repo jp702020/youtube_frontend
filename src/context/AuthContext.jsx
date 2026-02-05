@@ -31,6 +31,9 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("channel", JSON.stringify(channelData));
   };
 
+
+
+
   return (
     <AuthContext.Provider
       value={{ user, channel, login, logout, createChannel }}
