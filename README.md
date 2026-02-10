@@ -1,18 +1,77 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# 📘 FRONTEND README  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+```md
+# YouTube Clone – Frontend (React + Tailwind)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+This is the frontend of the YouTube Clone application built using
+React (Vite), Tailwind CSS, and React Router.
 
-Note: This will impact Vite dev & build performances.
+The UI closely follows the original YouTube layout and user experience.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Tech Stack
+
+- React (Vite)
+- React Router DOM
+- Tailwind CSS
+- Axios
+- Context API
+
+---
+
+## 🎨 UI Features
+
+- YouTube-like Header & Sidebar
+- Responsive Layout
+- Video Grid on Home Page
+- Watch Page with Video Player
+- Login & Signup Pages
+- Channel Page
+- Upload Video UI
+- Category Filters (UI)
+- Suggested Videos Section
+
+---
+
+## 📁 Project Structure
+
+frontend/
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── vite.config.js
+└── src/
+    ├── main.jsx
+    ├── App.jsx
+    ├── index.css
+    ├── api/
+    │   └── axios.js
+    ├── context/
+    │   ├── AuthContext.jsx
+    │   └── VideoContext.jsx
+    ├── components/
+    │   ├── Header.jsx
+    │   ├── Sidebar.jsx
+    │   ├── VideoCard.jsx
+    │   └── watch/
+    └── pages/
+        ├── Home.jsx
+        ├── Login.jsx
+        ├── Signup.jsx
+        ├── Watch.jsx
+        ├── Channel.jsx
+        └── UploadVideo.jsx
+
+---
+
+## ▶️ How to Run Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
